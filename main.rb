@@ -23,7 +23,7 @@ class Board < Sinatra::Base
   helpers do
     def css(*stylesheets)
       stylesheets.map do |stylesheet|
-        "<link href=\"#{stylesheet}.css\" rel=\"stylesheet\"/>"
+        "<link href=\"/#{AssetHandler.settings.cssdir}/#{stylesheet}.css\" media=\"screen, projection\" rel=\"stylesheet\" />"
       end.join
     end
   end
