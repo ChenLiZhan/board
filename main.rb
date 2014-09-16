@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'slim'
 require 'dm-core'
 require 'dm-migrations'
-
+require './asset-handler'
 class Message
   include DataMapper::Resource
   property :id, Serial
@@ -14,9 +14,18 @@ end
 DataMapper.finalize
 
 class Board < Sinatra::Base
+  use AssetHandler
 
   configure :development do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+  end
+
+  helpers do
+    def css(*stylesheets)
+      stylesheets.map do |stylesheet|
+        "<link href=\"#{stylesheet}.css\" rel=\"stylesheet\"/>"
+      end.join
+    end
   end
 
   get '/' do
