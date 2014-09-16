@@ -24,6 +24,8 @@ class Board < Sinatra::Base
   end
 
   get '/show' do
+    @message = Message.all
+    slim :show
   end
 
   get '/create' do
@@ -32,5 +34,6 @@ class Board < Sinatra::Base
 
   post '/create' do
     Message.create(:title => params['title'], :message => params['content'], :created => Time.now.to_i)
+    redirect to('/show')
   end
 end
