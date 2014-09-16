@@ -15,6 +15,6 @@ a {
   padding: 8px;
   color: red;
   &:hover {
-    background: darken(red, 80%);
+    background: darken(red, 20%);
   }
 }
